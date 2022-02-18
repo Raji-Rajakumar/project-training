@@ -49,7 +49,7 @@ public class AppController {
     }
 
     @GetMapping("/add")
-    public String doAdd(@RequestParam String a, @RequestParam String b){
+    public static String doAdd(@RequestParam String a, @RequestParam String b){
         int x =Integer.parseInt(a);
         int y =Integer.parseInt(b);
         int c = x+y;

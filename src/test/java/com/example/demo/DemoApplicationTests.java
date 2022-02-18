@@ -9,6 +9,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.demo.AppController.doAdd;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -22,14 +23,13 @@ class DemoApplicationTests {
 			InputStream inputStream = new FileInputStream(new File("src/main/resources/listOfTeamMembers.json"));
 			TypeReference<List<String>> typeReference = new TypeReference<List<String>>() {};
 			names = mapper.readValue(inputStream, typeReference);
-			System.out.println(names);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		AppController appController = new AppController();
 		assertEquals("Hello world", appController.showHelloWorld());
 		assertEquals(names, appController.showTeamMembersName());
-		assertEquals("The addition of an number is 10", appController.doAdd("5", "5"));
+		assertEquals("The addition of an number is 10", doAdd("5", "5"));
 	}
 
 }
