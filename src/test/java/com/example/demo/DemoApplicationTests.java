@@ -27,8 +27,9 @@ class DemoApplicationTests {
 			e.printStackTrace();
 		}
 		AppController appController = new AppController();
-		assertEquals("Hello world",appController.showHelloWorld());
-		assertEquals(names,appController.showTeamMembersName());
+		assertEquals("Hello world", appController.showHelloWorld());
+		assertEquals(names, appController.showTeamMembersName());
+		assertEquals("The addition of an number is 10", appController.doAdd("5", "5"));
 	}
 
 }
