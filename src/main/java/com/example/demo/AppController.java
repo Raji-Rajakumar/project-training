@@ -1,3 +1,11 @@
+/*
+ * AppController
+ *
+ * date 21-02-2022
+ *
+ * Copyrights Ideas2IT
+ */
+
 package com.example.demo;
 
 import java.util.List;
@@ -8,6 +16,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Receives the request and responses based on the request.
+ *
+ * @author  Raji Rajakumar
+ * @version 1.0
+ */
 @RestController
 public class AppController {
 
@@ -18,12 +32,22 @@ public class AppController {
     @Value("${spring.userEmail}")
     String userEmail;
 
+    /**
+     * Shows "hello world", when request for /hello endpoint.
+     *
+     * @return hello world the string.
+     */
     @GetMapping("/hello")
     public String showHelloWorld(){
 
         return "Hello world";
     }
 
+    /**
+     * Shows list of team members name, when request for /listOfTeamMembers endpoint.
+     *
+     * @return list of team members name the list.
+     */
     @GetMapping("/listOfTeamMembers")
     public List<String> showTeamMembersName(){
         List<String> nameList = new ArrayList<>();
@@ -41,6 +65,11 @@ public class AppController {
         return nameList;
     }
 
+    /**
+     * Shows app detail, when request for /appDetail endpoint.
+     *
+     * @return detail of app the string.
+     */
     @GetMapping("/appDetail")
     public String showAppDetail(){
         String appDetail = "The name of the application is "+ name + "<br>" + "User name is " + userName + "<br>" +
@@ -48,6 +77,13 @@ public class AppController {
         return appDetail;
     }
 
+    /**
+     * Shows addition of two numbers, when request for /add endpoint.
+     *
+     * @param a the number
+     * @param b the number
+     * @return addition of two numbers the string.
+     */
     @GetMapping("/add")
     public static String doAdd(@RequestParam String a, @RequestParam String b){
         int x =Integer.parseInt(a);
@@ -55,4 +91,99 @@ public class AppController {
         int c = x+y;
         return "The addition of an number is " + c;
     }
+
+    /**
+     * Implements method overloading with no parameter.
+     *
+     * @return the string.
+     */
+    @GetMapping("/name")
+    public String displayName()
+    {
+        return "No name is passed";
+    }
+
+    /**
+     * Implements method overloading with single parameter.
+     *
+     * @param name the string.
+     * @return the string.
+     */
+    @GetMapping("/singleName")
+    public String displayName(@RequestParam String name)
+    {
+        return "The passed name is: "+name;
+    }
+
+    /**
+     * Implements method overloading with two parameter.
+     *
+     * @param name1 the string.
+     * @param name2 the string.
+     * @return the string.
+     */
+    @GetMapping("/doubleName")
+    public String displayName(@RequestParam String name1, @RequestParam String name2)
+    {
+        return "The passed names are: "+name1 + " and "+name2;
+    }
+
+    /**
+     * Implements switch case concept.
+     *
+     * @param day the option.
+     * @return the string.
+     */
+    @GetMapping("/day")
+    public String displayDay(@RequestParam String day)
+    {
+        String today = null;
+
+        switch(day) {
+            case "sunday":
+                today = "sunday";
+                break;
+            case "monday":
+                today = "monday";
+                break;
+            case "tuesday":
+                today = "tuesday";
+                break;
+            case "wednesday":
+                today = "wednesday";
+                break;
+            case "thursday":
+                today = "thursday";
+                break;
+            case "friday":
+                today = "friday";
+                break;
+            case "saturday":
+                today = "saturday";
+                break;
+            default:
+                today = "none";
+        }
+            return "The passed day is "+today;
+    }
+
+    /**
+     * Implements recursion concept.
+     *
+     * @param number the string.
+     * @return the string.
+     */
+    public int calculateFactorial(int number)
+    {
+        int factorial = 0;
+        if (number == 1) {
+            factorial = 1;
+            System.out.println("The factorial is " + factorial);
+        } else {
+            factorial = number * calculateFactorial(number - 1);
+            System.out.println("The factorial is " + factorial);
+        }
+        return factorial;
+    }
+    
 }

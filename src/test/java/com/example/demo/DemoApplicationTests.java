@@ -1,3 +1,11 @@
+/*
+ * DemoApplicationTests
+ *
+ * date 21-02-2022
+ *
+ * Copyrights Ideas2IT
+ */
+
 package com.example.demo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,6 +20,12 @@ import java.util.List;
 import static com.example.demo.AppController.doAdd;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Contains method to unit test the application.
+ *
+ * @author  Raji Rajakumar
+ * @version 1.0
+ */
 @SpringBootTest
 class DemoApplicationTests {
 
@@ -20,7 +34,7 @@ class DemoApplicationTests {
 		List<String> names = new ArrayList<>();
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			InputStream inputStream = new FileInputStream(new File("src/main/resources/listOfTeamMembers.json"));
+			FileInputStream inputStream = new FileInputStream(new File("src/main/resources/listOfTeamMembers.json"));
 			TypeReference<List<String>> typeReference = new TypeReference<List<String>>() {};
 			names = mapper.readValue(inputStream, typeReference);
 		} catch (IOException e) {
