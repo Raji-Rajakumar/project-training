@@ -38,7 +38,7 @@ public class AppController {
      * @return hello world the string.
      */
     @GetMapping("/hello")
-    public String showHelloWorld(){
+    public String showHelloWorld() {
 
         return "Hello world";
     }
@@ -49,7 +49,7 @@ public class AppController {
      * @return list of team members name the list.
      */
     @GetMapping("/listOfTeamMembers")
-    public List<String> showTeamMembersName(){
+    public List<String> showTeamMembersName() {
         List<String> nameList = new ArrayList<>();
         nameList.add("Vijay Ramanujam");
         nameList.add("B Jebin Sam");
@@ -71,7 +71,7 @@ public class AppController {
      * @return detail of app the string.
      */
     @GetMapping("/appDetail")
-    public String showAppDetail(){
+    public String showAppDetail() {
         String appDetail = "The name of the application is "+ name + "<br>" + "User name is " + userName + "<br>" +
                 "User email is " + userEmail ;
         return appDetail;
@@ -85,7 +85,7 @@ public class AppController {
      * @return addition of two numbers the string.
      */
     @GetMapping("/add")
-    public static String doAdd(@RequestParam String a, @RequestParam String b){
+    public static String doAdd(@RequestParam String a, @RequestParam String b) {
         int x =Integer.parseInt(a);
         int y =Integer.parseInt(b);
         int c = x+y;
@@ -98,8 +98,7 @@ public class AppController {
      * @return the string.
      */
     @GetMapping("/name")
-    public String displayName()
-    {
+    public String displayName() {
         return "No name is passed";
     }
 
@@ -110,8 +109,7 @@ public class AppController {
      * @return the string.
      */
     @GetMapping("/singleName")
-    public String displayName(@RequestParam String name)
-    {
+    public String displayName(@RequestParam String name) {
         return "The passed name is: "+name;
     }
 
@@ -123,8 +121,7 @@ public class AppController {
      * @return the string.
      */
     @GetMapping("/doubleName")
-    public String displayName(@RequestParam String name1, @RequestParam String name2)
-    {
+    public String displayName(@RequestParam String name1, @RequestParam String name2) {
         return "The passed names are: "+name1 + " and "+name2;
     }
 
@@ -135,8 +132,7 @@ public class AppController {
      * @return the string.
      */
     @GetMapping("/day")
-    public String displayDay(@RequestParam String day)
-    {
+    public String displayDay(@RequestParam String day) {
         String today = null;
 
         switch(day) {
@@ -170,20 +166,39 @@ public class AppController {
     /**
      * Implements recursion concept.
      *
+     * @param input the string.
+     * @return the string.
+     */
+    @GetMapping("/reverse")
+    public String displayReverseOfString(@RequestParam String input) {
+        String reverseOfString = null;
+
+        if ((input == null)||(input.length() <= 1)) {
+            reverseOfString = input;
+        } else {
+            reverseOfString = displayReverseOfString(input.substring(1)) + input.charAt(0);
+        }
+
+        return reverseOfString;
+    }
+
+    /**
+     * Implements regex concept.
+     *
      * @param number the string.
      * @return the string.
      */
-    public int calculateFactorial(int number)
-    {
-        int factorial = 0;
-        if (number == 1) {
-            factorial = 1;
-            System.out.println("The factorial is " + factorial);
+    @GetMapping("/isValidNumber")
+    public String validateNumber(@RequestParam String number) {
+        boolean isValidNumber = number.matches("[0-9]+$");
+        String output;
+        if(isValidNumber) {
+            output = "It is an valid number";
         } else {
-            factorial = number * calculateFactorial(number - 1);
-            System.out.println("The factorial is " + factorial);
+            output = "It is not an valid number";
         }
-        return factorial;
+        return output;
     }
-    
+
+
 }
